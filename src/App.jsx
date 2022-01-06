@@ -23,6 +23,15 @@ export const App = () => {
     setIncompleateTodos(newTodos);
   };
 
+  const onClickCompleate = (index) => {
+    const newIncompleateTodos = [...incompleateTodos];
+    newIncompleateTodos.splice(index, 1);
+
+    const newCompleateTodos = [...compleateTodos, incompleateTodos[index]];
+    setIncompleateTodos(newIncompleateTodos);
+    setCompleateTodos(newCompleateTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -40,7 +49,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickCompleate(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
@@ -54,8 +63,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
-                <button>削除</button>
+                <button>戻す</button>
               </div>
             );
           })}
